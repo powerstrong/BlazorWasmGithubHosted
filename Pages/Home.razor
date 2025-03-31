@@ -1,7 +1,39 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+<h1>Home</h1>
 
-<h1>Hello, world!</h1>
+<FluentCard class="m-4 p-4">
+    <h3>Login</h3>
 
-Welcome to your new app.
+    <!-- Input fields for ID and Password -->
+    <FluentTextField @bind-Value="userId" Label="User ID" Placeholder="Enter your user ID" />
+    <FluentTextField @bind-Value="password" Label="Password" Placeholder="Enter your password" Type="Password" />
+
+    <!-- Login Button -->
+    <FluentButton Appearance="Appearance.Accent" @onclick="OnLoginClick" class="mt-4">Login</FluentButton>
+
+    <!-- Loading Animation (Progress Ring) -->
+    @if (isLoading)
+    {
+        <FluentProgressRing Indeterminate="true" Width="50px" Height="50px" Class="mt-4" />
+    }
+
+</FluentCard>
+
+@code {
+    private string userId = string.Empty;
+    private string password = string.Empty;
+    private bool isLoading;
+
+    private async Task OnLoginClick()
+    {
+        isLoading = true;
+        // Simulate a login attempt (e.g., authentication or API call)
+        await Task.Delay(2000);  // Simulate some delay (like a network request)
+        isLoading = false;
+
+        // Optionally, perform further actions here after login is complete
+        // For example, navigation or validation
+        Console.WriteLine($"User ID: {userId}, Password: {password}");
+    }
+}
